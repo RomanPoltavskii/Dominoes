@@ -3,16 +3,16 @@ package ru.vsu.cs.course2.g9.oop.poltavskii_r_a.dominoes;
 import java.awt.*;
 // класс, который задает кость как графически, так и логически
 public class Bone {
-    static final byte width = 32;
+    static final byte width = 30;
     static final byte height = width * 2;
     static final byte pointSize = 6;
-    static final Color colorMarked = Color.RED;
-    static final Color colorBack = Color.WHITE;
-    static final Color colorPoint = Color.BLACK;
+    static final Color colorMarked = Color.RED; // обводка
+    static final Color colorBack = Color.WHITE; // костяшка
+    static final Color colorPoint = Color.BLACK; // точки
     private byte points1, points2;
     private int X, Y;
     private byte dirX, dirY;
-    static byte[][][] pointCoords = {
+    static byte[][][] pointCoords = { // точки на костяшках
             {},
             {{0, 0}},
             {{-1, -1}, {1, 1}},
@@ -73,14 +73,14 @@ public class Bone {
         }
         return -1;
     } /**
-     * Получить размерности кости на экране для опеределения области прикосновения
+     * Получение размера костяшки на экране для опеределения области прикосновения
      */
     int[] getBounds() {
         int sx = getSizeX(), sy = getSizeY();
         return new int[]{X - sx / 2, X + sx / 2, Y - sy / 2, Y + sy / 2};
     }
     /**
-     * Отобразить кость
+     * Отображение костяшки
      */
     void show(Graphics G) {
         int sx = getSizeX(), sy = getSizeY();
@@ -103,7 +103,6 @@ public class Bone {
             int p = points1;
             if (s == 2) p = points2;
             for (int i = 0; i < p; i++) {
-//int d=width*i/(p+1)-pointSize/2;
                 int dx = pointCoords[p][i][0] * width / 4;
                 int dy = pointCoords[p][i][1] * width / 4;
                 G.fillOval(x1 + dx - pointSize / 2, y1 + dy - pointSize / 2,
@@ -122,7 +121,7 @@ public class Bone {
         G.fillRect(X - sx / 2, Y - sy / 2, sx, sy);
     }
     /**
-     * Перемещение кости на доске
+     * Перемещение костяшки
      */
     void moveTo(int x, int y, Graphics G, Color back) {
         hide(G, back);
@@ -131,7 +130,7 @@ public class Bone {
         show(G);
     }
     /**
-     * Поворот кости на доске
+     * Поворот костяшки
      */
     void rotate(int dirX, int dirY, Graphics G, Color back) {
         assert dirX >= -1 && dirX <= +1 && dirY >= -1 && dirY <= +1;
@@ -141,7 +140,7 @@ public class Bone {
         show(G);
     }
     /**
-     * Плавное перемещение кости на доске
+     * Плавное перемещение костяшки
      */
     void moveSliding(int x2, int y2, int time, Graphics G, Color back) {
         int x1 = getX(), y1 = getY();
